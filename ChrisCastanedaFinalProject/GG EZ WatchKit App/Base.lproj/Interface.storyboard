@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
+    </dependencies>
+    <scenes>
+        <!--GG EZ-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller title="GG EZ" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GG_EZ_WatchKit_Extension">
+                    <items>
+                        <table alignment="left" id="bQU-PV-odF"/>
+                        <imageView width="136" height="32" alignment="center" image="logo" contentMode="scaleAspectFit" id="djj-rc-lAX"/>
+                        <button width="1" alignment="left" title="Summoner" id="0vT-sF-zHL">
+                            <color key="backgroundColor" red="0.85098039219999999" green="0.71372549019999998" blue="0.070588235289999995" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="summonerButtonClicked" destination="AgC-eL-Hgc" id="lj4-MM-v3M"/>
+                                <segue destination="zCp-kh-Cfz" kind="push" id="ZuO-aF-MoA"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <color key="backgroundColor" red="0.071993076049999993" green="0.17674623640000001" blue="0.44438525880000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="logoImage" destination="djj-rc-lAX" id="TSM-Pi-463"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="235" y="159"/>
+        </scene>
+        <!--Summoner-->
+        <scene sceneID="XOb-ed-j49">
+            <objects>
+                <controller identifier="summonerPage" title="Summoner" id="zCp-kh-Cfz" customClass="summonerInterfaceController" customModule="GG_EZ_WatchKit_Extension">
+                    <items>
+                        <imageView width="42" height="43" alignment="center" id="yDZ-eh-SPV"/>
+                        <label width="136" alignment="center" text="McSwaggerstein69" textAlignment="center" id="s3s-8P-lwa">
+                            <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                        </label>
+                        <label width="136" alignment="left" text="LvL. 30" textAlignment="center" id="uIw-50-LuV"/>
+                        <separator alignment="left" alpha="0.5499999999999996" id="eAb-l8-FTN">
+                            <color key="color" red="0.85098039219999999" green="0.71372549019999998" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </separator>
+                        <table alignment="left" id="IPB-gK-Uzr">
+                            <items>
+                                <tableRow identifier="GameRow" id="sau-P2-Cy0" customClass="matchRow" customModule="GG_EZ_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="43.5" alignment="left" layout="vertical" id="vNf-U1-H03">
+                                        <items>
+                                            <label width="134" alignment="left" text="Heimerdinger" textAlignment="left" id="RbI-Rz-ah7">
+                                                <fontDescription key="font" type="italicSystem" pointSize="16"/>
+                                            </label>
+                                            <label width="131" alignment="left" text="100/100/100" textAlignment="center" id="4vm-6W-auX">
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="champLabel" destination="RbI-Rz-ah7" id="XfT-Oi-ip8"/>
+                                        <outlet property="kdaLabel" destination="4vm-6W-auX" id="mBV-zG-Rml"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <color key="backgroundColor" red="0.071993076049999993" green="0.17674623640000001" blue="0.44438525880000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="recentTable" destination="IPB-gK-Uzr" id="0ee-YD-nt2"/>
+                        <outlet property="summonerIcon" destination="yDZ-eh-SPV" id="cLL-b3-y68"/>
+                        <outlet property="summonerLevel" destination="uIw-50-LuV" id="job-WN-fOH"/>
+                        <outlet property="summonerName" destination="s3s-8P-lwa" id="ilI-lJ-kIx"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="485" y="159"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="XkS-y5-khE"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="XkS-y5-khE" id="49B-RR-99y"/>
+                        <segue destination="gdX-wl-uQE" kind="relationship" relationship="dynamicNotificationInterface" id="fKh-qV-3T2"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="235" y="1001"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="KIl-fV-djm">
+            <objects>
+                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="GG_EZ_WatchKit_Extension"/>
+            </objects>
+            <point key="canvasLocation" x="553" y="1001"/>
+        </scene>
+    </scenes>
+</document>

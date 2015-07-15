@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SummonerSpells</key>
+	<dict>
+		<key>13</key>
+		<string>SummonerMana</string>
+		<key>6</key>
+		<string>SummonerHaste</string>
+		<key>32</key>
+		<string>SummonerSnowball</string>
+		<key>21</key>
+		<string>SummonerBarrier</string>
+		<key>12</key>
+		<string>SummonerTeleport</string>
+		<key>3</key>
+		<string>SummonerExhaust</string>
+		<key>7</key>
+		<string>SummonerHeal</string>
+		<key>14</key>
+		<string>SummonerDot</string>
+		<key>11</key>
+		<string>SummonerSmite</string>
+		<key>4</key>
+		<string>SummonerFlash</string>
+	</dict>
+</dict>
+</plist>
