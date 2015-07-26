@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import Parse
 
 class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    var query = PFQuery(className:"apiKey");
+    var key = "";
+    
     @IBOutlet weak var logButton: UIButton!
     @IBOutlet weak var summonerNameLabel: UILabel!
     @IBOutlet weak var summonerImageLabel: UIImageView!
@@ -57,6 +62,9 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        for i in query.findObjects()! {
+            key = i["key"] as! String;
+        }
         tableView.registerNib(UINib(nibName: "recentTableViewCell", bundle: nil), forCellReuseIdentifier: "cellReuse");
         // Do any additional setup after loading the view.
         tableView.backgroundView?.backgroundColor = UIColor.clearColor();
@@ -340,7 +348,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
         if summID?.toInt() != 0 &&  summID?.toInt() != nil {
             summonerNameLabel.text = "";
             theIDis = summID!.toInt()!;
-            var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.4/summoner/\(summID!)?api_key=eed17583-dc5c-4e17-a5c8-611e6a9d3b62");
+            var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.4/summoner/\(summID!)?api_key=\(key)");
             
             if let url2 = urlz {
                 let request = NSURLRequest(URL: url2);
@@ -360,7 +368,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     }
     
     func startRecent () {
-        var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/\(theIDis)/recent?api_key=eed17583-dc5c-4e17-a5c8-611e6a9d3b62")
+        var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/\(theIDis)/recent?api_key=\(key)")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
@@ -372,7 +380,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     }
     
     func startLeague () {
-        var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/\(theIDis)?api_key=eed17583-dc5c-4e17-a5c8-611e6a9d3b62")
+        var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/\(theIDis)?api_key=\(key)")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);

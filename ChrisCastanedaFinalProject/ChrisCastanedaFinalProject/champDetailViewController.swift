@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Parse
 
 class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate, UIScrollViewDelegate {
+    
+    var query = PFQuery(className:"apiKey");
+    var key = "";
     
     @IBOutlet weak var champSplash: UIImageView!
     
@@ -34,11 +38,15 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
     var champData = NSMutableData();
     
     var info = champDetailInformation(pass: PassiveAbility(name: "Passive", image: "Ashe_P.png", desc: ""), spells: [Int : Ability](), tags: [""], tips: [[""]], stats: ChampStatsClass(stats: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]), lore: "");
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var urlz = NSURL(string: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/\(champInfo.champID)?champData=all&api_key=eed17583-dc5c-4e17-a5c8-611e6a9d3b62")
+        for i in query.findObjects()! {
+            key = i["key"] as! String;
+        }
+        
+        var urlz = NSURL(string: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/\(champInfo.champID)?champData=all&api_key=\(key)")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
@@ -62,7 +70,7 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
                 var textView = UITextView(frame: frame);
                 textView.backgroundColor = UIColor(red: CGFloat(222.0/255.0), green: CGFloat(222.0/255.0), blue: CGFloat(191.0/255.0), alpha: 1.0);
                 self.dataScrollView.addSubview(textView)
-
+                
             }
             else {
                 var op = NSBundle.mainBundle().loadNibNamed("ChampStatsView", owner: self, options: nil)[0] as? ChampStatsView;
@@ -75,7 +83,7 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
         dataScrollView.contentSize = CGSizeMake(self.dataScrollView.frame.size.width * CGFloat(colors.count), self.dataScrollView.frame.size.height);
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -88,7 +96,7 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
         }
         
     }
-
+    
     
     func connectionDidFinishLoading(connection: NSURLConnection) {
         if champData != 0 {
@@ -201,7 +209,7 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
         }
         if passiveInfo.count != 0 && abilityDict.count != 0 {
             info = champDetailInformation(pass: PassiveAbility(name: passiveInfo[0], image: passiveInfo[1], desc: passiveInfo[2]), spells: abilityDict, tags: t, tips: h, stats: ChampStatsClass(stats: s), lore: l);
-
+            
         }
     }
     
@@ -232,15 +240,6 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         //swipeToSeeLabel.hidden = true;
     }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

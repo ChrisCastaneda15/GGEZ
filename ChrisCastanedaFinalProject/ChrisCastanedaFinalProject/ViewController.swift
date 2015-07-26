@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Parse
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSURLConnectionDataDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    var query = PFQuery(className:"apiKey");
+    var key = "";
     
     var version = "";
     
@@ -36,9 +40,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var selectedChampionID = 0;
     
     var goTo = "";
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for i in query.findObjects()! {
+            key = i["key"] as! String;
+        }
+        
         for i in navBar {
             i.hidden = true;
         }
@@ -55,17 +64,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         tableView.registerNib(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier);
         tableView.backgroundColor = UIColor.clearColor();
         // Do any additional setup after loading the view, typically from a nib.
-        var urlz = NSURL(string: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?api_key=eed17583-dc5c-4e17-a5c8-611e6a9d3b62")
+        var urlz = NSURL(string: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?api_key=\(key)")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
             
             let connection = NSURLConnection(request: request, delegate: self, startImmediately: true);
         };
-
+        
     }
-
- 
+    
+    
     var champs: [ChampionInformation] = [];
     var dict: [ Int: ChampionInformation ] = [:]
     
@@ -92,7 +101,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         goTo = "champDetail";
         performSegueWithIdentifier("toChampDetail", sender: collectionView);
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return champs.count
     }
@@ -105,7 +114,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             cell.champImage.image = champs[indexPath.row].champImage
             cell.champTitle.text = "\"\(champs[indexPath.row].champTitle)\""
         }
-
+        
         
         return cell
     }
@@ -117,7 +126,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         performSegueWithIdentifier("toChampDetail", sender: tableView);
     }
     
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if goTo == "champDetail" {
             let cVC = segue.destinationViewController as! champDetailViewController
@@ -140,8 +149,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func doLoading() {
         if loadingView.hidden == true {
             //dispatch_async(dispatch_get_main_queue(), {
-                self.loadingView.hidden = false;
-                self.loadingImage.startAnimating();
+            self.loadingView.hidden = false;
+            self.loadingImage.startAnimating();
             //})
             
         }
@@ -160,7 +169,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func connectionDidFinishLoading(connection: NSURLConnection) {
         if yoItsData.length != 0 {
             getChamps();
-
+            
             for (id, info) in dict {
                 champs.append(info)
             }
@@ -223,7 +232,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         
     }
-
+    
     
     @IBAction func champLayoutChanged(sender: UISegmentedControl) {
         
@@ -258,6 +267,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
-  
+    
 }
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7EE077AF-49E0-405E-8CCA-922092C95024</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GG EZ</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>92E8722E716386142339A73E083AF9EF0FDBAF8D</key>
+		<string>https://github.com/ChrisCastaneda15/GGEZ.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ChrisCastanedaFinalProject/GG EZ.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>92E8722E716386142339A73E083AF9EF0FDBAF8D</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ChrisCastaneda15/GGEZ.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>92E8722E716386142339A73E083AF9EF0FDBAF8D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>92E8722E716386142339A73E083AF9EF0FDBAF8D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GGEZ</string>
+		</dict>
+	</array>
+</dict>
+</plist>

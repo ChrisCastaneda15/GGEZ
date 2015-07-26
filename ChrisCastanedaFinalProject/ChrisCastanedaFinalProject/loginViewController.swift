@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Parse
 
 class loginViewController: UIViewController, NSURLConnectionDataDelegate {
+    
+    var query = PFQuery(className:"apiKey");
+    var key = "";
     
     @IBOutlet weak var summonerInput: UITextField!
     
@@ -23,7 +27,10 @@ class loginViewController: UIViewController, NSURLConnectionDataDelegate {
     var summoner: summonerBaseInfo? = nil;
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad();
+        for i in query.findObjects()! {
+            key = i["key"] as! String;
+        }
         activityIndicator.hidden = true;
         // Do any additional setup after loading the view.
     }
@@ -47,7 +54,7 @@ class loginViewController: UIViewController, NSURLConnectionDataDelegate {
         };
         println(theAct);
         
-        var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/\(theAct)?api_key=eed17583-dc5c-4e17-a5c8-611e6a9d3b62")
+        var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/\(theAct)?api_key=\(key)")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
