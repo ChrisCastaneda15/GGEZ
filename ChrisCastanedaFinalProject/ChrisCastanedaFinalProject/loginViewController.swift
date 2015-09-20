@@ -47,14 +47,14 @@ class loginViewController: UIViewController, NSURLConnectionDataDelegate {
     @IBAction func login(sender: AnyObject) {
         activityIndicator.hidden = false;
         summonerInput.userInteractionEnabled = false;
-        var actual = summonerInput.text.lowercaseString;
+        let actual = summonerInput.text!.lowercaseString;
         
         for i in actual.componentsSeparatedByString(" "){
             theAct += i;
         };
-        println(theAct);
+        print(theAct);
         
-        var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/\(theAct)?api_key=\(key)")
+        let urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/\(theAct)?api_key=\(key)")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
@@ -66,7 +66,7 @@ class loginViewController: UIViewController, NSURLConnectionDataDelegate {
     
     func connection(connection: NSURLConnection, didReceiveData data: NSData) {
         if data.length != 0 {
-            println("yo");
+            print("yo");
             summonerData.appendData(data);
         }
     }

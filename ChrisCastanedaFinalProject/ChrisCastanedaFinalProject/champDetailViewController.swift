@@ -46,12 +46,12 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
             key = i["key"] as! String;
         }
         
-        var urlz = NSURL(string: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/\(champInfo.champID)?champData=all&api_key=\(key)")
+        let urlz = NSURL(string: "http://sleven15-test.apigee.net/ChampDetail")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
             
-            let connection = NSURLConnection(request: request, delegate: self, startImmediately: true);
+            _ = NSURLConnection(request: request, delegate: self, startImmediately: true);
         };
         
         champName.text = champInfo.champName
@@ -67,13 +67,13 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
             //self.dataScrollView.pagingEnabled = true
             
             if colors[index] == "TEXT" {
-                var textView = UITextView(frame: frame);
+                let textView = UITextView(frame: frame);
                 textView.backgroundColor = UIColor(red: CGFloat(222.0/255.0), green: CGFloat(222.0/255.0), blue: CGFloat(191.0/255.0), alpha: 1.0);
                 self.dataScrollView.addSubview(textView)
                 
             }
             else {
-                var op = NSBundle.mainBundle().loadNibNamed("ChampStatsView", owner: self, options: nil)[0] as? ChampStatsView;
+                let op = NSBundle.mainBundle().loadNibNamed("ChampStatsView", owner: self, options: nil)[0] as? ChampStatsView;
                 op?.frame = frame
                 self.dataScrollView.addSubview(op!);
             }
@@ -103,10 +103,10 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
             getChampInfo();
             
             abilities[0].image = info.passive.abilityImage;
-            println(info.passive.abilityImage);
+            print(info.passive.abilityImage);
             for i in 1...4 {
                 if let aimg = info.abilites[(i - 1)]?.abilityImage {
-                    println(aimg);
+                    print(aimg);
                     abilities[i].image = aimg;
                 }
                 abilities[i].layer.borderColor = UIColor.yellowColor().CGColor;
@@ -141,7 +141,7 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
                 }
                 
                 if let view = i as? UITextView {
-                    var yuyuyu = info.lore.componentsSeparatedByString("<br><br>");
+                    let yuyuyu = info.lore.componentsSeparatedByString("<br><br>");
                     var newText = "";
                     var loreText = "";
                     
@@ -165,7 +165,7 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
         var passiveInfo = [String]()
         var abilityDict = [Int: Ability]();
         var t = [String]()
-        var h = [[String](), [String]()];
+        let h = [[String](), [String]()];
         var s = [Double]();
         var l = "";
         var count = 0;
@@ -175,7 +175,7 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
                 l = lore;
             }
             if let stats = info["stats"]!.dictionary {
-                var statttssss = ["hp", "hpregen", "mp", "mpregen", "attackdamage", "attackspeedoffset", "armor", "spellblock", "movespeed"]
+                let statttssss = ["hp", "hpregen", "mp", "mpregen", "attackdamage", "attackspeedoffset", "armor", "spellblock", "movespeed"]
                 for i in statttssss {
                     s.append(stats[i]!.double!);
                 }
@@ -194,9 +194,9 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
             }
             if let spells = info["spells"]!.array {
                 for i in spells {
-                    var n = i["name"].string!
+                    let n = i["name"].string!
                     var imgz = ""
-                    var d = i["sanitizedDescription"].string!
+                    let d = i["sanitizedDescription"].string!
                     if let name = i["image"].dictionary {
                         if let img = name["full"]!.string {
                             imgz = img;
@@ -229,7 +229,7 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
             abilityDescription.text = info.passive.abilityDescription;
         }
         else {
-            var a = sender.tag - 1;
+            let a = sender.tag - 1;
             abilityNameLabel.text = abilityButtons[sender.tag] + info.abilites[a]!.abilityName;
             abilityDescription.text = info.abilites[a]!.abilityDescription;
         }

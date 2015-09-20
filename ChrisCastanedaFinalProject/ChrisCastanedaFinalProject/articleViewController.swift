@@ -51,33 +51,33 @@ class articleViewController: UIViewController, UIWebViewDelegate, UIActionSheetD
     }
     
     @IBAction func shareButtonClicked(sender: AnyObject) {
-        println("SHARE");
-        var actionSheet = UIAlertController(title: "Share", message: nil, preferredStyle: .ActionSheet);
+        print("SHARE");
+        let actionSheet = UIAlertController(title: "Share", message: nil, preferredStyle: .ActionSheet);
         actionSheet.addAction(UIAlertAction(title: "Open in Safari", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
             UIApplication.sharedApplication().openURL(url!);
         }));
         actionSheet.addAction(UIAlertAction(title: "Share on Facebook", style: .Default, handler: { (action) -> Void in
             if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
-                var facebook = SLComposeViewController(forServiceType: SLServiceTypeFacebook);
-                println(facebook.setInitialText(self.textForSocial));
-                println(self.textForSocial);
+                let facebook = SLComposeViewController(forServiceType: SLServiceTypeFacebook);
+                print(facebook.setInitialText(self.textForSocial));
+                print(self.textForSocial);
                 facebook.addURL(self.url);
                 self.presentViewController(facebook, animated: true, completion: nil);
             }
             else {
-                println("error")
+                print("error")
             }
         }))
         actionSheet.addAction(UIAlertAction(title: "Share on Twitter", style: .Default, handler: { (action) -> Void in
             if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
-                var twitter = SLComposeViewController(forServiceType: SLServiceTypeTwitter);
+                let twitter = SLComposeViewController(forServiceType: SLServiceTypeTwitter);
                 twitter.setInitialText(self.textForSocial);
                 twitter.addURL(self.url);
                 self.presentViewController(twitter, animated: true, completion: nil);
             }
         }))
         actionSheet.addAction(UIAlertAction(title: "Copy Link to Clipboard", style: .Default, handler: { (action) -> Void in
-            println(self.url?.description);
+            print(self.url?.description);
             UIPasteboard.generalPasteboard().string = self.url!.description;
         }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))

@@ -29,9 +29,9 @@ class summonerInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        var summonersName = defaults4Watch!.stringForKey("summonerName4Watch");
-        var summonersLevel = defaults4Watch!.stringForKey("summonerLevel4Watch");
-        var summonersIcon = defaults4Watch!.stringForKey("summonerIcon4Watch");
+        let summonersName = defaults4Watch!.stringForKey("summonerName4Watch");
+        let summonersLevel = defaults4Watch!.stringForKey("summonerLevel4Watch");
+        let summonersIcon = defaults4Watch!.stringForKey("summonerIcon4Watch");
         
         
         // Configure interface objects here.
@@ -44,9 +44,9 @@ class summonerInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        var summonersName = defaults4Watch!.stringForKey("summonerName4Watch");
-        var summonersLevel = defaults4Watch!.stringForKey("summonerLevel4Watch");
-        var summonersIcon = defaults4Watch!.stringForKey("summonerIcon4Watch");
+        let summonersName = defaults4Watch!.stringForKey("summonerName4Watch");
+        let summonersLevel = defaults4Watch!.stringForKey("summonerLevel4Watch");
+        let summonersIcon = defaults4Watch!.stringForKey("summonerIcon4Watch");
         summonerName.setText(summonersName);
         summonerLevel.setText("LvL: \(summonersLevel!)");
         summonerIcon.setImageData(NSData(contentsOfURL: NSURL(string: summonersIcon!)!)!)
@@ -60,24 +60,24 @@ class summonerInterfaceController: WKInterfaceController {
     func reloadTable() {
         // 1
 //        var matches = [String]();
-        var champs = defaults4Watch?.stringArrayForKey("rmChampArray4Watch") as! [String];
-        var kills = defaults4Watch?.stringArrayForKey("rmKillArray4Watch") as! [String];
-        var deaths = defaults4Watch?.stringArrayForKey("rmDeathArray4Watch") as! [String];
-        var assists = defaults4Watch?.stringArrayForKey("rmAssistArray4Watch") as! [String];
-        
-        
-        recentTable.setNumberOfRows(champs.count, withRowType: "GameRow")
-        for i in 0..<recentTable.numberOfRows {
-            if let row = recentTable.rowControllerAtIndex(i) as? matchRow {
-                // 3
-                row.champLabel.setText(champs[i]);
-                row.kdaLabel.setText("\(kills[i])/\(deaths[i])/\(assists[i])");
-            }
-        }
+//        var champs = defaults4Watch?.stringArrayForKey("rmChampArray4Watch") as! [String];
+//        var kills = defaults4Watch?.stringArrayForKey("rmKillArray4Watch") as! [String];
+//        var deaths = defaults4Watch?.stringArrayForKey("rmDeathArray4Watch") as! [String];
+//        var assists = defaults4Watch?.stringArrayForKey("rmAssistArray4Watch") as! [String];
+//        
+//        
+//        recentTable.setNumberOfRows(champs.count, withRowType: "GameRow")
+//        for i in 0..<recentTable.numberOfRows {
+//            if let row = recentTable.rowControllerAtIndex(i) as? matchRow {
+//                // 3
+//                row.champLabel.setText(champs[i]);
+//                row.kdaLabel.setText("\(kills[i])/\(deaths[i])/\(assists[i])");
+//            }
+//        }
     }
 
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        println(rowIndex);
+        print(rowIndex);
     }
     
 }

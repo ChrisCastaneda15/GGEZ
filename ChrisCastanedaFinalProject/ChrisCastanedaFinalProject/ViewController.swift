@@ -64,7 +64,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         tableView.registerNib(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier);
         tableView.backgroundColor = UIColor.clearColor();
         // Do any additional setup after loading the view, typically from a nib.
-        var urlz = NSURL(string: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?api_key=\(key)")
+        let urlz = NSURL(string: "http://sleven15-test.apigee.net/allChampions");
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
@@ -73,8 +73,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         };
         
     }
-    
-    
+
     var champs: [ChampionInformation] = [];
     var dict: [ Int: ChampionInformation ] = [:]
     
@@ -175,7 +174,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
             
             
-            champs.sort{ $0.champName.lowercaseString < $1.champName.lowercaseString };
+            champs.sortInPlace{ $0.champName.lowercaseString < $1.champName.lowercaseString };
             
             champCollectionView.reloadData();
             tableView.reloadData();
@@ -248,19 +247,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     
     @IBAction func statsButtonPressed(sender: AnyObject) {
-        println("Stats");
+        print("Stats");
         goTo = "Stats";
         performSegueWithIdentifier("toStats", sender: sender);
     }
     
     @IBAction func itemsButtonPressed(sender: AnyObject) {
-        println("Items");
+        print("Items");
         doLoading();
         performSegueWithIdentifier("toItems", sender: sender);
     }
     
     @IBAction func newsButtonPressed(sender: AnyObject) {
-        println("News");
+        print("News");
         goTo = "News";
         doLoading();
         performSegueWithIdentifier("toNews", sender: sender);

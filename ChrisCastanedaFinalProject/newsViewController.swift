@@ -23,20 +23,20 @@ class newsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "newsTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier);
         
-        var query = PFQuery(className:"LoL_News")
+        let query = PFQuery(className:"LoL_News")
         
         for i in query.findObjects()! {
-            var title = i["Title"] as! String;
-            var date = i["dateString"] as! String;
-            var image = i["imgURL"] as! String;
-            var url = i["URL"] as! String;
-            var date1 = i["Posted"] as! NSDate;
+            let title = i["Title"] as! String;
+            let date = i["dateString"] as! String;
+            let image = i["imgURL"] as! String;
+            let url = i["URL"] as! String;
+            let date1 = i["Posted"] as! NSDate;
             
             array.append(Article(title: title, date: date, image: image, url: url, date1: date1));
         }
         
         
-        array.sort { (lhs: Article, rhs: Article) -> Bool in
+        array.sortInPlace { (lhs: Article, rhs: Article) -> Bool in
             lhs.articleDate.compare(rhs.articleDate) == NSComparisonResult.OrderedDescending
         }
         

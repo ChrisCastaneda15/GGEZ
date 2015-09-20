@@ -12,7 +12,6 @@
 		830E91711B0FAF3000FC659D /* matchClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E91701B0FAF3000FC659D /* matchClass.swift */; };
 		830E91721B0FB3CC00FC659D /* matchClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E91701B0FAF3000FC659D /* matchClass.swift */; };
 		830E91751B0FBED100FC659D /* recentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E91731B0FBED100FC659D /* recentTableViewCell.swift */; };
-		830E91761B0FBED100FC659D /* recentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830E91741B0FBED100FC659D /* recentTableViewCell.xib */; };
 		830E91781B0FC65400FC659D /* recentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E91731B0FBED100FC659D /* recentTableViewCell.swift */; };
 		830E91791B0FC65400FC659D /* recentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830E91741B0FBED100FC659D /* recentTableViewCell.xib */; };
 		830E91831B0FFED400FC659D /* stuff.plist in Resources */ = {isa = PBXBuildFile; fileRef = 830E91821B0FFED400FC659D /* stuff.plist */; };
@@ -28,6 +27,8 @@
 		8327D6491AFD9C9F00649CA2 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8327D6481AFD9C9F00649CA2 /* SwiftyJSON.swift */; };
 		8327D6501B00414400649CA2 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8327D64E1B00414400649CA2 /* TableViewCell.swift */; };
 		8327D6511B00414400649CA2 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8327D64F1B00414400649CA2 /* TableViewCell.xib */; };
+		833146091B7FF8A90042F33A /* GG EZ WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 833560F11B0A852700E2F7A2 /* GG EZ WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8331460D1B7FF9820042F33A /* GG EZ WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 833561001B0A852700E2F7A2 /* GG EZ WatchKit App.app */; };
 		8335253D1B06BE9200484EB8 /* articleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8335253C1B06BE9200484EB8 /* articleViewController.swift */; };
 		8335253F1B06D8AC00484EB8 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8335253E1B06D8AC00484EB8 /* Social.framework */; };
 		833560EC1B0A84F300E2F7A2 /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833560EB1B0A84F300E2F7A2 /* WatchKit.framework */; };
@@ -81,6 +82,20 @@
 			remoteGlobalIDString = 8327D5C61AF8581500649CA2;
 			remoteInfo = ChrisCastanedaFinalProject;
 		};
+		8331460A1B7FF8AA0042F33A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8327D5BF1AF8581500649CA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 833560F01B0A852700E2F7A2;
+			remoteInfo = "GG EZ WatchKit Extension";
+		};
+		8331460E1B7FF9820042F33A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8327D5BF1AF8581500649CA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 833560FF1B0A852700E2F7A2;
+			remoteInfo = "GG EZ WatchKit App";
+		};
 		833561021B0A852700E2F7A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8327D5BF1AF8581500649CA2 /* Project object */;
@@ -89,6 +104,20 @@
 			remoteInfo = "GG EZ WatchKit App";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8331460C1B7FF8AA0042F33A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				833146091B7FF8A90042F33A /* GG EZ WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		830E916A1B0D827A00FC659D /* summBaseInfoWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = summBaseInfoWatch.swift; sourceTree = "<group>"; };
@@ -473,10 +502,13 @@
 				8327D5C31AF8581500649CA2 /* Sources */,
 				8327D5C41AF8581500649CA2 /* Frameworks */,
 				8327D5C51AF8581500649CA2 /* Resources */,
+				8331460C1B7FF8AA0042F33A /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8331460B1B7FF8AA0042F33A /* PBXTargetDependency */,
+				8331460F1B7FF9820042F33A /* PBXTargetDependency */,
 			);
 			name = "GG EZ";
 			productName = ChrisCastanedaFinalProject;
@@ -540,6 +572,8 @@
 		8327D5BF1AF8581500649CA2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Chris Castaneda";
 				TargetAttributes = {
@@ -603,6 +637,7 @@
 				830E91791B0FC65400FC659D /* recentTableViewCell.xib in Resources */,
 				8327D5D71AF8581500649CA2 /* LaunchScreen.xib in Resources */,
 				8327D6461AFD971100649CA2 /* CollectionViewCell.xib in Resources */,
+				8331460D1B7FF9820042F33A /* GG EZ WatchKit App.app in Resources */,
 				83AEE3401B164B3800545402 /* itemCollectionViewCell.xib in Resources */,
 				830E91831B0FFED400FC659D /* stuff.plist in Resources */,
 				8327D5D41AF8581500649CA2 /* Images.xcassets in Resources */,
@@ -620,7 +655,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				830E91761B0FBED100FC659D /* recentTableViewCell.xib in Resources */,
 				830E91841B0FFED400FC659D /* stuff.plist in Resources */,
 				833561011B0A852700E2F7A2 /* GG EZ WatchKit App.app in Resources */,
 				833560FD1B0A852700E2F7A2 /* Images.xcassets in Resources */,
@@ -700,6 +734,16 @@
 			isa = PBXTargetDependency;
 			target = 8327D5C61AF8581500649CA2 /* GG EZ */;
 			targetProxy = 8327D5DD1AF8581500649CA2 /* PBXContainerItemProxy */;
+		};
+		8331460B1B7FF8AA0042F33A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 833560F01B0A852700E2F7A2 /* GG EZ WatchKit Extension */;
+			targetProxy = 8331460A1B7FF8AA0042F33A /* PBXContainerItemProxy */;
+		};
+		8331460F1B7FF9820042F33A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 833560FF1B0A852700E2F7A2 /* GG EZ WatchKit App */;
+			targetProxy = 8331460E1B7FF9820042F33A /* PBXContainerItemProxy */;
 		};
 		833561031B0A852700E2F7A2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

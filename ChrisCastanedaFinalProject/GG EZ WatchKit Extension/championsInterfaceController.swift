@@ -38,7 +38,7 @@ class championsInterfaceController: WKInterfaceController {
     }
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        println(rowIndex);
+        print(rowIndex);
     }
 
     override func willActivate() {

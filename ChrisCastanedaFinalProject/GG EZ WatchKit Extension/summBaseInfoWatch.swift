@@ -19,7 +19,7 @@ class summonerBaseInfo: NSCoding {
         aCoder.encodeInt(0, forKey: "id");
         aCoder.encodeObject("", forKey: "icon");
     }
-    @objc required init(coder aDecoder: NSCoder) {
+    @objc required init?(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObjectForKey("name") as? String ?? "";
         self.id = Int(aDecoder.decodeIntForKey("id"));
         self.icon = aDecoder.decodeObjectForKey("icon") as? String ?? "http://ddragon.leagueoflegends.com/cdn/5.9.1/img/profileicon/759.png";

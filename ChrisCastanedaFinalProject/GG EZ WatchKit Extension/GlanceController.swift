@@ -21,9 +21,9 @@ class GlanceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        var summonersName = defaults4Watch!.stringForKey("summonerName4Watch");
-        var summonersLevel = defaults4Watch!.stringForKey("summonerLevel4Watch");
-        var summonersIcon = defaults4Watch!.stringForKey("summonerIcon4Watch");
+        let summonersName = defaults4Watch!.stringForKey("summonerName4Watch");
+        let summonersLevel = defaults4Watch!.stringForKey("summonerLevel4Watch");
+        let summonersIcon = defaults4Watch!.stringForKey("summonerIcon4Watch");
         
         summonerName.setText(summonersName);
         summonerLevel.setText("LvL. \(summonersLevel!)");
@@ -33,9 +33,9 @@ class GlanceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        var summonersName = defaults4Watch!.stringForKey("summonerName4Watch");
-        var summonersLevel = defaults4Watch!.stringForKey("summonerLevel4Watch");
-        var summonersIcon = defaults4Watch!.stringForKey("summonerIcon4Watch");
+        let summonersName = defaults4Watch!.stringForKey("summonerName4Watch");
+        let summonersLevel = defaults4Watch!.stringForKey("summonerLevel4Watch");
+        let summonersIcon = defaults4Watch!.stringForKey("summonerIcon4Watch");
         
         summonerName.setText(summonersName);
         summonerLevel.setText("LvL. \(summonersLevel!)");

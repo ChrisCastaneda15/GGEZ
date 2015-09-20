@@ -30,14 +30,14 @@ class InterfaceController: WKInterfaceController {
     }
 
     @IBAction func summonerButtonClicked() {
-        println("goToSummoner");
-        println(NSUserDefaults.standardUserDefaults().stringForKey("Version"));
+        print("goToSummoner");
+        print(NSUserDefaults.standardUserDefaults().stringForKey("Version"));
     }
     
     
     
     @IBAction func championButtonClicked() {
-        println("goToChampions");
+        print("goToChampions");
     }
     
 }

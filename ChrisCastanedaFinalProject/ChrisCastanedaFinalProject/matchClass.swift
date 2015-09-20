@@ -49,8 +49,8 @@ class LoLMatch {
             var s = [UIImage]();
             if let dict = myDict, let strongSelf = self {
                 for i in spells {
-                    var img: AnyObject = dict["SummonerSpells"]!
-                    var c: AnyObject? = img["\(i)"]!
+                    let img: AnyObject = dict["SummonerSpells"]!
+                    let c: AnyObject? = img["\(i)"]!
                     s.append(UIImage(data: NSData(contentsOfURL: NSURL(string: "http://ddragon.leagueoflegends.com/cdn/\(strongSelf.apiVersion!)/img/spell/\(c!).png")!)!)!)
                 }
                 strongSelf.spells = s;
@@ -71,8 +71,8 @@ class LoLMatch {
                         u.append(UIImage(named: "noItem")!)
                     }
                     else {
-                        var year: Double = 1421853964000;
-                        var time: Double = Double(strongSelf.date);
+                        let year: Double = 1421853964000;
+                        let time: Double = Double(strongSelf.date);
                         if time > year {
                             u.append(UIImage(data: NSData(contentsOfURL: NSURL(string: "http://ddragon.leagueoflegends.com/cdn/\(strongSelf.apiVersion!)/img/item/\(i).png")!)!)!)
                         }

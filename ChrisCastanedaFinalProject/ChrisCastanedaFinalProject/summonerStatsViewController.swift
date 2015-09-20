@@ -116,7 +116,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
             defaults4Watch!.setObject(summoner?.name, forKey: "summonerName4Watch");
             defaults4Watch!.setObject(summLevel, forKey: "summonerLevel4Watch");
             defaults4Watch!.setObject(summoner?.icon, forKey: "summonerIcon4Watch");
-            var conQ = dispatch_queue_create("com.castaneda.GG-EZ", DISPATCH_QUEUE_CONCURRENT);
+            let conQ = dispatch_queue_create("com.castaneda.GG-EZ", DISPATCH_QUEUE_CONCURRENT);
             
             dispatch_async(conQ, {
                  var iconURL = UIImage()
@@ -144,7 +144,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
                 tableView.hidden = false;
                 tableView.reloadData();
                 for i in recentMatches {
-                    println(i.win);
+                    print(i.win);
                 }
             }
             else {
@@ -190,7 +190,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
                     default:
                         num = 5;
                     }
-                    var lImg = UIImage(data: NSData(contentsOfURL: NSURL(string: "http://sk2.op.gg/images/medals/\(tier)_\(num).png")!)!)
+                    let lImg = UIImage(data: NSData(contentsOfURL: NSURL(string: "http://sk2.op.gg/images/medals/\(tier)_\(num).png")!)!)
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         self.leagueIcon.hidden = false;
@@ -252,7 +252,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
                 qName = entries["name"]!.string!;
                 if let mahEnt = entries["entries"]!.array {
                     for i in mahEnt {
-                        if i["playerOrTeamId"].string?.toInt() == theIDis {
+                        if Int(i["playerOrTeamId"].string!) == theIDis {
                             div = i["division"].string!;
                             lP = i["leaguePoints"].int!;
                         }
@@ -326,7 +326,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
                     length = info["stats"]["timePlayed"].int!
                 }
                 
-                var daMatch = LoLMatch(gameType: gameType, gameId: gameId, date: date, champID: championId,level: level, deaths: deaths, kills: kills, assists: assists, win: win, length: length);
+                let daMatch = LoLMatch(gameType: gameType, gameId: gameId, date: date, champID: championId,level: level, deaths: deaths, kills: kills, assists: assists, win: win, length: length);
                 daMatch.getThoseImages(conQAwwShit, tV: tableView, items: items, spells: spells)
                 recentMatches.append(daMatch);
                 items = [Int]();
@@ -336,7 +336,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     }
     
     func refresh() {
-        var summID = NSUserDefaults.standardUserDefaults().stringForKey("loggedSummonerId");
+        let summID = NSUserDefaults.standardUserDefaults().stringForKey("loggedSummonerId");
         lP = nil;
         div = nil;
         tier = nil;
@@ -345,19 +345,23 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
         leagueName.text = ""
         lpLabel.text = ""
         leagueIcon.hidden = true;
-        if summID?.toInt() != 0 &&  summID?.toInt() != nil {
-            summonerNameLabel.text = "";
-            theIDis = summID!.toInt()!;
-            var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.4/summoner/\(summID!)?api_key=\(key)");
-            
-            if let url2 = urlz {
-                let request = NSURLRequest(URL: url2);
+        if let sID = summID {
+            if Int(sID) != 0 &&  Int(sID) != nil {
+                summonerNameLabel.text = "";
+                theIDis = Int(sID)!;
+                print(theIDis);
+                let urlz = NSURL(string: "http://sleven15-test.apigee.net/summinfo");
                 
-                let connection = NSURLConnection(request: request, delegate: self, startImmediately: false);
-                connection?.start();
-            };
-            
+                if let url2 = urlz {
+                    let request = NSURLRequest(URL: url2);
+                    
+                    let connection = NSURLConnection(request: request, delegate: self, startImmediately: false);
+                    connection?.start();
+                };
+                
+            }
         }
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -368,7 +372,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     }
     
     func startRecent () {
-        var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/\(theIDis)/recent?api_key=\(key)")
+        let urlz = NSURL(string: "http://sleven15-test.apigee.net/summrecent")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
@@ -380,7 +384,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     }
     
     func startLeague () {
-        var urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/\(theIDis)?api_key=\(key)")
+        let urlz = NSURL(string: "http://sleven15-test.apigee.net/summleague")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
@@ -398,11 +402,11 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     
     func formatSeconds (seconds : Int) -> (hours: Int, minutes: String, secs: String) {
         var m = ((seconds % 3600) / 60).description;
-        if m.toInt() < 10 {
+        if Int(m) < 10 {
             m = "0\((seconds % 3600) / 60)";
         }
         var s = ((seconds % 3600) % 60).description;
-        if s.toInt() < 10 {
+        if Int(s) < 10 {
             s = "0\((seconds % 3600) % 60)";
         }
         
@@ -413,7 +417,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
         let cell = tableView.dequeueReusableCellWithIdentifier("cellReuse", forIndexPath: indexPath) as! recentTableViewCell;
         
         if recentMatches.count > 0 {
-            var theStuff = dict[recentMatches[indexPath.row].championId]!
+            let theStuff = dict[recentMatches[indexPath.row].championId]!
             
             if recentMatches[indexPath.row].win == true {
                 cell.bView.layer.backgroundColor = UIColor(red: 33.0/255.0, green: 125.0/255.0, blue: 56.0/255.0, alpha: 1.0).CGColor;
@@ -430,12 +434,12 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
                 cell.kda.text = "(Perfect KDA)"
             }
             else {
-                var ka = Double(recentMatches[indexPath.row].kills + recentMatches[indexPath.row].assists)
-                var d = Double(recentMatches[indexPath.row].deaths)
+                let ka = Double(recentMatches[indexPath.row].kills + recentMatches[indexPath.row].assists)
+                let d = Double(recentMatches[indexPath.row].deaths)
                 cell.kda.text = "(\(Double(round(100*(ka/d))/100)):1 KDA)";
             }
             
-            var time = formatSeconds(recentMatches[indexPath.row].length);
+            let time = formatSeconds(recentMatches[indexPath.row].length);
             if time.hours == 0 {
                 cell.timePlayedLabel.text = "\(time.minutes):\(time.secs)";
             }
@@ -445,8 +449,8 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
             
             cell.champImage.image = theStuff.champImage;
             
-            var date = NSDate(timeIntervalSince1970: NSTimeInterval((recentMatches[indexPath.row].date)) / 1000);
-            var dateForm = NSDateFormatter()
+            let date = NSDate(timeIntervalSince1970: NSTimeInterval((recentMatches[indexPath.row].date)) / 1000);
+            let dateForm = NSDateFormatter()
             dateForm.dateStyle = NSDateFormatterStyle.ShortStyle;
             
             cell.dateLabel.text = dateForm.stringFromDate(date);
@@ -474,7 +478,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     
     
     @IBAction func unwindToSumm(segue: UIStoryboardSegue){
-        if let source = segue.sourceViewController as? loginViewController {
+        if let _ = segue.sourceViewController as? loginViewController {
             refresh();
             recentMatches = [LoLMatch]();
         }

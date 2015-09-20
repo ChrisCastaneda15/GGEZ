@@ -32,7 +32,7 @@ class itemsViewController: UIViewController, UICollectionViewDataSource, UIColle
         itemName.text = "Select an Item";
         itemCost.text = "";
         
-        var urlz = NSURL(string: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=gold,image,maps&api_key=eed17583-dc5c-4e17-a5c8-611e6a9d3b62")
+        let urlz = NSURL(string: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=gold,image,maps&api_key=eed17583-dc5c-4e17-a5c8-611e6a9d3b62")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
@@ -74,7 +74,7 @@ class itemsViewController: UIViewController, UICollectionViewDataSource, UIColle
         itemName.text = itemArray[indexPath.row].name;
         itemCost.text = "\(itemArray[indexPath.row].goldCost) gold";
         itemImage.image = itemArray[indexPath.row].image;
-        println(indexPath.row);
+        print(indexPath.row);
     }
     
     func connection(connection: NSURLConnection, didReceiveData data: NSData) {
@@ -91,7 +91,7 @@ class itemsViewController: UIViewController, UICollectionViewDataSource, UIColle
                 itemArray.append(i.1);
             }
             
-            itemArray.sort({ (less: LoLItem, more: LoLItem) -> Bool in
+            itemArray.sortInPlace({ (less: LoLItem, more: LoLItem) -> Bool in
                 less.goldCost < more.goldCost;
             })
             
@@ -130,7 +130,7 @@ class itemsViewController: UIViewController, UICollectionViewDataSource, UIColle
                     img = image["full"]!.string!;
                 }
                 
-                var item = LoLItem(name: name, desc: desc, gold: gold)
+                let item = LoLItem(name: name, desc: desc, gold: gold)
                 item.getDatImage(conQAwwShit, cV: itemsCLView, img: img);
                 itemDict.updateValue(item, forKey: name);
                 
