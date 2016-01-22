@@ -54,7 +54,7 @@ class articleViewController: UIViewController, UIWebViewDelegate, UIActionSheetD
         print("SHARE");
         let actionSheet = UIAlertController(title: "Share", message: nil, preferredStyle: .ActionSheet);
         actionSheet.addAction(UIAlertAction(title: "Open in Safari", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            UIApplication.sharedApplication().openURL(url!);
+            UIApplication.sharedApplication().openURL(self.url!);
         }));
         actionSheet.addAction(UIAlertAction(title: "Share on Facebook", style: .Default, handler: { (action) -> Void in
             if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {

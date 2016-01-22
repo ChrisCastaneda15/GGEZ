@@ -44,8 +44,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for i in query.findObjects()! {
-            key = i["key"] as! String;
+        var a = [PFObject]();
+        do{
+            try a = query.findObjects()
+            for i in a {
+                key = i["key"] as! String;
+            }
+        }
+        catch{
+            print(error);
         }
         
         for i in navBar {
@@ -69,7 +76,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
             
-            let connection = NSURLConnection(request: request, delegate: self, startImmediately: true);
+            _ = NSURLConnection(request: request, delegate: self, startImmediately: true);
         };
         
     }

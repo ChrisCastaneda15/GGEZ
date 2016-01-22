@@ -62,9 +62,18 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        for i in query.findObjects()! {
-            key = i["key"] as! String;
+        
+        var a = [PFObject]();
+        do{
+            try a = query.findObjects()
+            for i in a {
+                key = i["key"] as! String;
+            }
         }
+        catch{
+            print(error);
+        }
+    
         tableView.registerNib(UINib(nibName: "recentTableViewCell", bundle: nil), forCellReuseIdentifier: "cellReuse");
         // Do any additional setup after loading the view.
         tableView.backgroundView?.backgroundColor = UIColor.clearColor();
@@ -350,7 +359,8 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
                 summonerNameLabel.text = "";
                 theIDis = Int(sID)!;
                 print(theIDis);
-                let urlz = NSURL(string: "http://sleven15-test.apigee.net/summinfo");
+                //http://sleven15-test.apigee.net/summinfo
+                let urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.4/summoner/\(summID!)?api_key=\(key)");
                 
                 if let url2 = urlz {
                     let request = NSURLRequest(URL: url2);
@@ -372,7 +382,8 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     }
     
     func startRecent () {
-        let urlz = NSURL(string: "http://sleven15-test.apigee.net/summrecent")
+        let summID = NSUserDefaults.standardUserDefaults().stringForKey("loggedSummonerId");
+        let urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/\(summID!)/recent?api_key=\(key)")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
@@ -384,7 +395,8 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     }
     
     func startLeague () {
-        let urlz = NSURL(string: "http://sleven15-test.apigee.net/summleague")
+        let summID = NSUserDefaults.standardUserDefaults().stringForKey("loggedSummonerId");
+        let urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/\(summID)?api_key=\(key)")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);

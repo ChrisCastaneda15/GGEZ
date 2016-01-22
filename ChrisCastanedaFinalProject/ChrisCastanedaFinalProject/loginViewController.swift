@@ -28,8 +28,15 @@ class loginViewController: UIViewController, NSURLConnectionDataDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        for i in query.findObjects()! {
-            key = i["key"] as! String;
+        var a = [PFObject]();
+        do{
+            try a = query.findObjects()
+            for i in a {
+                key = i["key"] as! String;
+            }
+        }
+        catch{
+            print(error);
         }
         activityIndicator.hidden = true;
         // Do any additional setup after loading the view.

@@ -42,11 +42,18 @@ class champDetailViewController: UIViewController,  NSURLConnectionDataDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for i in query.findObjects()! {
-            key = i["key"] as! String;
+        var a = [PFObject]();
+        do{
+            try a = query.findObjects()
+            for i in a {
+                key = i["key"] as! String;
+            }
+        }
+        catch{
+            print(error);
         }
         
-        let urlz = NSURL(string: "http://sleven15-test.apigee.net/ChampDetail")
+        let urlz = NSURL(string: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/\(champInfo.champID)?champData=all&api_key=\(key)")
         
         if let url2 = urlz {
             let request = NSURLRequest(URL: url2);
