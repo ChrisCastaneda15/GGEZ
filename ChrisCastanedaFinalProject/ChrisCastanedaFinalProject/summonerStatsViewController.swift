@@ -53,6 +53,8 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     
     var recentMatches = [LoLMatch]();
     
+    var selectedMatch: LoLMatch?;
+    
     var summoner: summonerBaseInfo? = nil;
     var summLevel = 0;
     var lP: Int? = nil;
@@ -152,9 +154,9 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
             if recentMatches.count > 0 {
                 tableView.hidden = false;
                 tableView.reloadData();
-                for i in recentMatches {
-                    print(i.win);
-                }
+//                for i in recentMatches {
+//                    print(i.win);
+//                }
             }
             else {
                 tableView.hidden = true;
@@ -169,13 +171,6 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
                 a4wD.append(i.deaths.description);
                 a4wA.append(i.assists.description);
             }
-            
-            defaults4Watch!.setObject(a4wChampName, forKey: "rmChampArray4Watch");
-            defaults4Watch!.setObject(a4wK, forKey: "rmKillArray4Watch");
-            defaults4Watch!.setObject(a4wD, forKey: "rmDeathArray4Watch");
-            defaults4Watch!.setObject(a4wA, forKey: "rmAssistArray4Watch");
-            
-            
             
             recentData = NSMutableData();
         }
@@ -254,6 +249,7 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     }
     
     func getLeague() {
+        print("GETTIN IT");
         let response = JSON(data: leagueData);
         if let me = response["\(theIDis)"].array {
             if let entries = me[0].dictionary {
@@ -379,6 +375,13 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
             let sVC = segue.destinationViewController as! searchViewController
             sVC.dict = self.dict;
         }
+        else if goTo == "MatchHist"{
+            let wVC = segue.destinationViewController as! WebViewController
+            wVC.gameType = (selectedMatch?.gameType)!;
+            wVC.champUsed = (dict[(selectedMatch?.championId)!]);
+            wVC.vic = (selectedMatch?.win)!
+            wVC.gameId = (selectedMatch?.gameId)!
+        }
     }
     
     func startRecent () {
@@ -395,10 +398,11 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
     }
     
     func startLeague () {
+        print("yo");
         let summID = NSUserDefaults.standardUserDefaults().stringForKey("loggedSummonerId");
-        let urlz = NSURL(string: "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/\(summID)?api_key=\(key)")
+        let urlL = NSURL(string: "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/\(summID!)?api_key=\(key)")
         
-        if let url2 = urlz {
+        if let url2 = urlL {
             let request = NSURLRequest(URL: url2);
             
             leagueCon = NSURLConnection(request: request, delegate: self, startImmediately: false)!;
@@ -481,6 +485,13 @@ class summonerStatsViewController: UIViewController, NSURLConnectionDataDelegate
         
         return cell;
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedMatch = recentMatches[indexPath.row];
+        goTo = "MatchHist";
+        performSegueWithIdentifier("toMatchDet", sender: tableView);
+    }
+    
     
     
     @IBAction func searchYo(sender: AnyObject) {

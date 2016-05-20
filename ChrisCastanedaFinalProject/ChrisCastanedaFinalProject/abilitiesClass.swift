@@ -35,8 +35,9 @@ class PassiveAbility {
     
     init(name: String, image: String, desc: String) {
         abilityName = name;
+        let i = image.stringByReplacingOccurrencesOfString(" ", withString: "%20")
         if let apiVersion = apiVersion {
-            abilityImage = UIImage(data: NSData(contentsOfURL: NSURL(string: "http://ddragon.leagueoflegends.com/cdn/\(apiVersion)/img/passive/\(image)")!)!)
+            abilityImage = UIImage(data: NSData(contentsOfURL: NSURL(string: "http://ddragon.leagueoflegends.com/cdn/\(apiVersion)/img/passive/\(i)")!)!)
         }
         
         abilityDescription = desc;

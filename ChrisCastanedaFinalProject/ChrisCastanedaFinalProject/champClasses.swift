@@ -44,14 +44,16 @@ class champDetailInformation {
     var tips: [[String]];
     var stats: ChampStatsClass;
     var lore: String;
+    var basicStats: [Int]
     
-    init(pass: PassiveAbility, spells: [Int: Ability], tags: [String], tips: [[String]], stats: ChampStatsClass, lore: String) {
+    init(pass: PassiveAbility, spells: [Int: Ability], tags: [String], tips: [[String]], stats: ChampStatsClass, lore: String, baseStats: [Int]) {
         passive = pass;
         abilites = spells;
         self.tags = tags;
         self.tips = tips;
         self.stats = stats;
         self.lore = lore;
+        basicStats = baseStats;
     }
     
 }

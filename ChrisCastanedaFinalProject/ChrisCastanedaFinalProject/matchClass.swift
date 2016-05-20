@@ -25,7 +25,7 @@ class LoLMatch {
     
     
     init (gameType: String, gameId: Int, date: Int, champID: Int, level: Int, deaths: Int, kills: Int, assists: Int, win: Bool, length: Int) {
-        self.gameType = gameType;
+        self.gameType = gameType.stringByReplacingOccurrencesOfString("_SOLO_", withString: " ");
         self.gameId = gameId;
         self.date = date;
         self.championId = champID;
